@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vega Labs | Inteligencia Artificial & Automatización</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --accent: #38bdf8;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            max-width: 450px;
+            width: 100%;
+            border: 1px solid #334155;
+        }
+        h1 { font-size: 24px; color: var(--accent); margin-bottom: 5px; }
+        p { color: #94a3b8; font-size: 14px; margin-bottom: 25px; }
+        label { display: block; font-size: 14px; margin-bottom: 8px; font-weight: 500; }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            background: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            color: white;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        button {
+            width: 100%;
+            background: var(--accent);
+            color: #0f172a;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: opacity 0.2s;
+        }
+        button:hover { opacity: 0.9; }
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            background: #0f172a;
+            border-radius: 6px;
+            border-left: 4px solid var(--accent);
+            display: none;
+        }
+        .result-box h3 { margin: 0 0 5px 0; font-size: 16px; color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Vega Labs</h1>
+        <p>Optimización de procesos mediante Ingeniería e IA.</p>
+        
+        <label for="horas">Horas perdidas al mes en tareas manuales:</label>
+        <input type="number" id="horas" placeholder="Ej. 40" min="1">
+
+        <label for="costo">Costo estimado por hora (S/.):</label>
+        <input type="number" id="costo" placeholder="Ej. 25" min="1">
+
+        <button onclick="calcularAhorro()">Calcular Impacto de Automatización</button>
+
+        <div id="resultado" class="result-box">
+            <h3>Análisis de Eficiencia</h3>
+            <span id="mensaje-ahorro"></span>
+        </div>
+    </div>
+
+    <!-- CONEXIÓN EXPLÍCITA A JAVASCRIPT EXIGIDA POR JS.ORG -->
+    <script>
+        function calcularAhorro() {
+            const horas = parseFloat(document.getElementById('horas').value);
+            const costo = parseFloat(document.getElementById('costo').value);
+            const rBox = document.getElementById('resultado');
+            const msg = document.getElementById('mensaje-ahorro');
+
+            if (isNaN(horas) || isNaN(costo)) {
+                alert('Por favor, ingresa valores válidos.');
+                return;
+            }
+
+            const ahorroMensual = horas * costo;
+            const ahorroAnual = ahorroMensual * 12;
+
+            msg.innerHTML = `Al automatizar este proceso con IA, tu negocio ahorrará aproximadamente <b>S/. ${ahorroMensual.toFixed(2)} PEN</b> al mes.<br><br>Esto equivale a una optimización de <b>S/. ${ahorroAnual.toFixed(2)} PEN</b> al año.`;
+            rBox.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
